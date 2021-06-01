@@ -1,13 +1,15 @@
+// Dynamic Implementation of a gRPC API Under Node.js
 let grpc = require("grpc");
 var protoLoader = require("@grpc/proto-loader");
 var readline = require("readline");
 
-//Read terminal Lines
+//Read terminal Lines - save us effort to implement a UI
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
+//load the .proto file into memory at runtime
 var proto = grpc.loadPackageDefinition(
   protoLoader.loadSync("protos/chat.proto", {
     keepCase: true,
@@ -18,7 +20,7 @@ var proto = grpc.loadPackageDefinition(
   })
 );
 
-const REMOTE_SERVER = "0.0.0.0:5001";
+const REMOTE_SERVER = "127.0.0.1:50051";
 
 let username;
 

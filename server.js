@@ -1,10 +1,11 @@
+// Dynamic Implementation of a gRPC API Under Node.js
 let grpc = require("grpc");
 var protoLoader = require("@grpc/proto-loader");
 
 const server = new grpc.Server();
-const SERVER_ADDRESS = "0.0.0.0:5001";
+const SERVER_ADDRESS = "127.0.0.1:50051";
 
-//Load protobuf
+//load the .proto file into memory at runtime
 let proto = grpc.loadPackageDefinition(
   protoLoader.loadSync("protos/chat.proto", {
     keepCase: true,
