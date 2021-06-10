@@ -37,7 +37,14 @@ function startChat() {
   channel.on("data", onData);
 
   rl.on("line", function(text) {
-    client.send({ user: username, text: text }, res => {});
+    client.send({ user: username, text: text }, (err,res) => {
+      if(!err){
+        // This can be remove, just for test correct response from server in successful cases
+        console.log(`${res.user}: ${res.text}`); 
+      } else{
+        console.log(err.message);
+      }
+    });
   });
 }
 

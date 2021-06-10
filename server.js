@@ -26,7 +26,17 @@ function join(call, callback) {
 
 //Receive message from client
 function send(call, callback) {
-  notifyChat(call.request);
+  // Error handling test
+  if (call.request.user === ''){
+    return callback({
+      code: grpc.status.INVALID_ARGUMENT,
+      message: 'The username is empty, please fill it out properly'
+    });
+  } else {
+    notifyChat(call.request);
+    // Just a response from server to confirm everything is ok
+    callback(null, {user: 'Server', text: 'OK'});
+  }
 }
 
 //Send message to all connected clients
